@@ -115,6 +115,9 @@ import collections
 from tqdm import tqdm
 from six import iteritems
 
+os.environ["KERAS_BACKEND"] = "theano"
+from keras.callbacks import Callback
+
 from .containers import DottedDict
 from .utils import SuppressStdoutAndStderr, Timer, SimpleMathStringEvaluator, get_parameter_hash
 from .features import FeatureContainer
@@ -875,7 +878,7 @@ class KerasMixin(object):
         self.keras_setup_done = True
 
 
-class BaseCallback(object):
+class BaseCallback(Callback):
     """Base class for Callbacks
     """
     def __init__(self, *args, **kwargs):
